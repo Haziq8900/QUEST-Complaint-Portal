@@ -1,0 +1,424 @@
+/* ==========================================================================
+   QUEST COMPLAINT PORTAL — DASHBOARD STYLESHEET (v2)
+   Darker theme to match updated style.css
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. WELCOME SECTIONS
+   -------------------------------------------------------------------------- */
+.welcome-section,
+.welcome-section .welcome-section-container {
+    position: relative;
+}
+
+.welcome-section {
+    background: var(--gradient-mesh);
+    color: #fff;
+    padding-block: clamp(48px, 7vw, 80px) clamp(72px, 9vw, 112px);
+    overflow: hidden;
+    position: relative;
+}
+
+.welcome-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(ellipse at top left, black, transparent 70%);
+    pointer-events: none;
+}
+
+.welcome-content,
+.welcome-section-content {
+    position: relative;
+    max-width: 620px;
+}
+
+.welcome-content h1,
+.welcome-section-content h1 {
+    color: #fff;
+}
+
+.welcome-content p,
+.welcome-section-content p {
+    color: rgba(255, 255, 255, 0.72);
+    margin-top: 12px;
+    font-size: 1.02rem;
+}
+
+/* --------------------------------------------------------------------------
+   2. STATS SECTION
+   Student dashboard: cards overlap the hero bottom edge (negative margin).
+   Admin dashboard: has an h2 "Complaint Overview" inside .stats-section so
+   no overlap needed — sits cleanly below the hero with normal top padding.
+   -------------------------------------------------------------------------- */
+
+/* Admin: has h2 inside, so sits below hero with normal spacing */
+.stats-section:has(h2) {
+    margin-top: 0;
+    position: relative;
+    z-index: 3;
+    padding-block: clamp(32px, 5vw, 56px) 24px;
+}
+
+.stats-section:has(h2) h2 {
+    margin-bottom: 20px;
+    color: var(--color-primary-dark);
+}
+
+/* Student: no h2, cards overlap bottom of hero */
+.stats-section:not(:has(h2)) {
+    margin-top: -56px;
+    position: relative;
+    z-index: 3;
+    padding-block: 0 24px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius-md);
+    padding: 22px 22px 20px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    opacity: 0.09;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md), 0 0 0 1px var(--color-border);
+}
+
+.stat-card h2,
+.stat-card h3 {
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.stat-number {
+    display: block;
+    font-size: clamp(1.7rem, 1.4rem + 1vw, 2.4rem);
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    letter-spacing: -0.01em;
+}
+
+.stat-card:nth-child(1) {
+    border-top: 3px solid var(--color-primary);
+}
+
+.stat-card:nth-child(2) {
+    border-top: 3px solid var(--color-warning);
+}
+
+.stat-card:nth-child(3) {
+    border-top: 3px solid var(--color-progress);
+}
+
+.stat-card:nth-child(4) {
+    border-top: 3px solid var(--color-success);
+}
+
+/* --------------------------------------------------------------------------
+   3. QUICK ACTIONS
+   -------------------------------------------------------------------------- */
+.quick-actions,
+.quick-actions-section {
+    padding-top: 8px;
+}
+
+.quick-action-content,
+.quick-actions-section .quick-actions-container h2 {
+    margin-bottom: 6px;
+}
+
+.quick-action-content p,
+.quick-actions-section p {
+    margin-bottom: 22px;
+}
+
+.quick-action-content,
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.quick-action-content a {
+    flex: 1 1 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 22px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.quick-action-content a:nth-child(2) {
+    background: var(--color-bg-card);
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-border-strong);
+    box-shadow: none;
+}
+
+.quick-action-content a:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.action-buttons a {
+    flex: 1 1 200px;
+    text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   4. RECENT / ADMIN COMPLAINTS SECTIONS
+   -------------------------------------------------------------------------- */
+.recent-complaints,
+.recent-complaints-section,
+.complaint-management-section {
+    padding-top: 8px;
+}
+
+.recent-complaint-content h2,
+.recent-complaints-section h2,
+.complaint-management-content h2 {
+    margin-bottom: 6px;
+}
+
+.recent-complaint-content>p,
+.recent-complaints-section>.recent-complaints-container>p,
+.complaint-management-content p {
+    margin-bottom: 22px;
+}
+
+.complaint-management-section {
+    background: var(--color-bg-soft);
+    border-block: 1px solid var(--color-border);
+}
+
+/* Admin dashboard table sits directly in .recent-complaints-container with no
+   wrapper div — give it the same card treatment as .complaint-history-table */
+.recent-complaints-section .recent-complaints-container>table,
+.recent-complaints-section .recent-complaints-container>.qcp-table-toolbar+table {
+    display: block;
+    overflow-x: auto;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+/* --------------------------------------------------------------------------
+   5. STATUS BADGES
+   -------------------------------------------------------------------------- */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.status-pending {
+    background: var(--color-warning-bg);
+    color: var(--color-warning);
+}
+
+.status-in-progress {
+    background: var(--color-progress-bg);
+    color: var(--color-progress);
+}
+
+.status-resolved {
+    background: var(--color-success-bg);
+    color: var(--color-success);
+}
+
+/* --------------------------------------------------------------------------
+   6. TABLE TOOLBAR — search icon fixed so it doesn't overlap text
+   -------------------------------------------------------------------------- */
+.qcp-table-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.qcp-search-wrap {
+    position: relative;
+    flex: 1 1 260px;
+    max-width: 340px;
+}
+
+.qcp-search-wrap i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-faint);
+    font-size: 0.82rem;
+    pointer-events: none;
+}
+
+/* Search icon sits at left:14px, FA icon ~16px wide, gap 10px → need ≥40px.
+   Using 46px gives comfortable clearance on all screen sizes. */
+.qcp-search-input {
+    width: 100%;
+    padding: 10px 14px 10px 46px;
+    border: 1.5px solid var(--color-border);
+    border-radius: 999px;
+    font-size: 0.86rem;
+    background: var(--color-bg-card);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.qcp-search-input:focus-visible {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px rgba(10, 53, 128, 0.1);
+}
+
+.qcp-filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.qcp-filter-btn {
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-muted);
+    background: var(--color-bg-soft);
+    border: 1.5px solid transparent;
+    transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.qcp-filter-btn:hover {
+    color: var(--color-primary);
+}
+
+.qcp-filter-btn.qcp-filter-active {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.qcp-empty-row td {
+    text-align: center;
+    color: var(--color-faint);
+    font-style: italic;
+    padding: 32px 18px;
+}
+
+/* --------------------------------------------------------------------------
+   7. CARD ENTRANCE ANIMATION
+   -------------------------------------------------------------------------- */
+.qcp-card-init {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+}
+
+.qcp-card-in {
+    animation: qcpCardIn 0.5s var(--ease) forwards;
+}
+
+@keyframes qcpCardIn {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* --------------------------------------------------------------------------
+   8. RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width: 980px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .stats-section:not(:has(h2)) {
+        margin-top: -32px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 16px 16px 14px;
+    }
+
+    .quick-action-content a,
+    .action-buttons a {
+        flex: 1 1 100%;
+    }
+
+    .qcp-table-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .qcp-search-wrap {
+        max-width: none;
+    }
+}
+
+@media (max-width: 420px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
