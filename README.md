@@ -215,7 +215,6 @@ QUEST-Complaint-Portal/
 
 ## 🔐 Security Notes
 
-- Passwords are stored using PHP's `password_hash()` / `password_verify()` functions
 - Sessions are used for authentication state management
 - Student records cascade-delete their complaints on account removal
 - University emails are enforced as unique identifiers
