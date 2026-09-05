@@ -166,7 +166,7 @@ QUEST-Complaint-Portal/
 | Frontend | HTML5, CSS3, JavaScript |
 | Backend | PHP (procedural) |
 | Database | MySQL |
-| Server | Apache (via XAMPP / WAMP) |
+| Server | Apache (XAMPP) |
 
 ---
 
